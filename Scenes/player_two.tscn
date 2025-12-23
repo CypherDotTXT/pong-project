@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://yxhbb70v27x2"]
+
+[ext_resource type="Script" uid="uid://cc8rrod43myhp" path="res://Scripts/Player_two_movement.cs" id="1_p8sfr"]
+[ext_resource type="Texture2D" uid="uid://brigks36igiuq" path="res://Sprites/sprites.png" id="2_ytrmp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_efiyu"]
+size = Vector2(10, 109)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x78of"]
+atlas = ExtResource("2_ytrmp")
+region = Rect2(58, 12, 34, 126)
+
+[node name="Player two" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_p8sfr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_efiyu")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = SubResource("AtlasTexture_x78of")

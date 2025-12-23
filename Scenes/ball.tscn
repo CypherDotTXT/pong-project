@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddfawnshhqosk"]
+
+[ext_resource type="Texture2D" uid="uid://brigks36igiuq" path="res://Sprites/sprites.png" id="1_d60mj"]
+[ext_resource type="Script" uid="uid://b15fl3n3k7ja6" path="res://Scripts/BallMovement.cs" id="1_ij5cq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk4cr"]
+radius = 11.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ij5cq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_376qj"]
+atlas = ExtResource("1_d60mj")
+region = Rect2(104, 3, 43, 45)
+
+[node name="Ball" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_ij5cq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_yk4cr")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+material = SubResource("CanvasItemMaterial_ij5cq")
+texture = SubResource("AtlasTexture_376qj")
