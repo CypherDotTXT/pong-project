@@ -30,16 +30,22 @@ public partial class BallMovement : CharacterBody2D
 
         if (collision != null)
         {
-            GD.Print(collider.Name);
+            GD.Print(collider.Name); //Maybe try printing "current" name? See what comes up
 
-            if (current.IsInGroup("Player"))
+            Velocity = Velocity.Bounce(collision.GetNormal()); //Get rid of this line when uncommenting below lines when testing HandlePlayerBounce
+
+            /* When the code below is used there is no collision bounce at all, 
+            which means that the if statement might be coming back as false.
+            OR ther may be an issue with what variable "current" is outputing *\
+
+            /* if (current.IsInGroup("Player")) 
             {
                 HandlePlayerBounce(current);
             }
             else
             {
                 Velocity = Velocity.Bounce(collision.GetNormal());
-            }
+            } */
         }
     }
 
@@ -70,7 +76,7 @@ public partial class BallMovement : CharacterBody2D
         Vector2 newDirection = new Vector2(
             Mathf.Cos(bounceAngle) * directionX,
             Mathf.Sin(bounceAngle)
-    );
+        );
 
         Velocity = newDirection.Normalized() * speed;
     }
