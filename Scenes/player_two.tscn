@@ -12,7 +12,7 @@ region = Rect2(58, 12, 34, 126)
 
 [node name="Player two" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Player"]]
 script = ExtResource("1_p8sfr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]

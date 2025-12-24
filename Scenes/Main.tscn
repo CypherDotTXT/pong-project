@@ -47,8 +47,8 @@ shape = SubResource("RectangleShape2D_c1w88")
 [node name="Ball" parent="." instance=ExtResource("1_r150o")]
 position = Vector2(578, 286)
 
-[node name="Player one" parent="." groups=["Player"] instance=ExtResource("2_idj7w")]
+[node name="Player one" parent="." instance=ExtResource("2_idj7w")]
 position = Vector2(64, 296)
 
-[node name="Player two" parent="." groups=["Player"] instance=ExtResource("3_kln2b")]
+[node name="Player two" parent="." instance=ExtResource("3_kln2b")]
 position = Vector2(1088, 296)

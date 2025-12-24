@@ -22,30 +22,17 @@ public partial class BallMovement : CharacterBody2D
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
         Node collider = collision.GetCollider() as Node;
 
-        Node current = collider;
-        while (current != null)
-        {
-            current = current.GetParent();
-        }
-
         if (collision != null)
         {
-            GD.Print(collider.Name); //Maybe try printing "current" name? See what comes up
 
-            Velocity = Velocity.Bounce(collision.GetNormal()); //Get rid of this line when uncommenting below lines when testing HandlePlayerBounce
-
-            /* When the code below is used there is no collision bounce at all, 
-            which means that the if statement might be coming back as false.
-            OR ther may be an issue with what variable "current" is outputing *\
-
-            /* if (current.IsInGroup("Player")) 
+            if (collider.IsInGroup("Player"))
             {
-                HandlePlayerBounce(current);
+                HandlePlayerBounce(collider);
             }
             else
             {
                 Velocity = Velocity.Bounce(collision.GetNormal());
-            } */
+            }
         }
     }
 
