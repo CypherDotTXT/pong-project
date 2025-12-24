@@ -4,7 +4,8 @@ using System;
 public partial class BallMovement : CharacterBody2D
 {
     [Export] public float speed = 500.0f;
-
+    public bool p1Scored = false;
+    public bool p2Scored = false;
     public override void _Ready()
     {
         float startAngleDegrees = (float)GD.RandRange(15.0, 75.0);
@@ -21,13 +22,21 @@ public partial class BallMovement : CharacterBody2D
     {
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
         Node collider = collision.GetCollider() as Node;
-
+        String stringCollider = collider.ToString();
         if (collision != null)
         {
 
             if (collider.IsInGroup("Player"))
             {
                 HandlePlayerBounce(collider);
+            }
+            else if (stringCollider == "Right Boundary")
+            {
+                HandleScoreP1();
+            }
+            else if (stringCollider == "Left Boundary")
+            {
+                HandleScoreP2();
             }
             else
             {
@@ -38,8 +47,6 @@ public partial class BallMovement : CharacterBody2D
 
     private void HandlePlayerBounce(Node player)
     {
-        GD.Print("PADDLE HIT");
-
         var paddle = player as CharacterBody2D;
         if (paddle == null) return;
 
@@ -66,5 +73,17 @@ public partial class BallMovement : CharacterBody2D
         );
 
         Velocity = newDirection.Normalized() * speed;
+    }
+
+    public bool HandleScoreP1()
+    {
+        p1Scored = true;
+        return p1Scored;
+    }
+
+    public bool HandleScoreP2()
+    {
+        p2Scored = true;
+        return p2Scored;
     }
 }

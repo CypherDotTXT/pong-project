@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ne8umrid2sed"]
+[gd_scene load_steps=9 format=3 uid="uid://ne8umrid2sed"]
 
 [ext_resource type="PackedScene" uid="uid://ddfawnshhqosk" path="res://Scenes/ball.tscn" id="1_r150o"]
+[ext_resource type="Script" uid="uid://bulm4cxyev0io" path="res://Scenes/Main.cs" id="1_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://bq77gbm1fb3gu" path="res://Scenes/player_one.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://yxhbb70v27x2" path="res://Scenes/player_two.tscn" id="3_kln2b"]
 
@@ -10,7 +11,14 @@ size = Vector2(1153.5, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r150o"]
 size = Vector2(19, 688.25)
 
+[sub_resource type="LabelSettings" id="LabelSettings_pbw6q"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_v1gob"]
+font_size = 50
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_rgh2o")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1151.0
@@ -26,13 +34,13 @@ anchor_mode = 0
 position = Vector2(576.25, -10)
 shape = SubResource("RectangleShape2D_c1w88")
 
-[node name="Left Boundary" type="StaticBody2D" parent="."]
+[node name="Left Boundary" type="StaticBody2D" parent="." groups=["ScoreWall"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left Boundary"]
 position = Vector2(-8, 324)
 shape = SubResource("RectangleShape2D_r150o")
 
-[node name="Right Boundary" type="StaticBody2D" parent="."]
+[node name="Right Boundary" type="StaticBody2D" parent="." groups=["ScoreWall"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Boundary"]
 position = Vector2(1159.5, 323.875)
@@ -52,3 +60,31 @@ position = Vector2(64, 296)
 
 [node name="Player two" parent="." instance=ExtResource("3_kln2b")]
 position = Vector2(1088, 296)
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="P1Score" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 93.0
+text = "0"
+label_settings = SubResource("LabelSettings_pbw6q")
+
+[node name="P2Score" type="Label" parent="."]
+offset_left = 1072.0
+offset_top = 24.0
+offset_right = 1120.0
+offset_bottom = 93.0
+text = "0"
+label_settings = SubResource("LabelSettings_v1gob")
+
+[node name="P1 Start" type="Marker2D" parent="."]
+position = Vector2(64, 296)
+
+[node name="P2 Start" type="Marker2D" parent="."]
+position = Vector2(1088, 296)
+
+[node name="Ball Start" type="Marker2D" parent="."]
+position = Vector2(578, 286)
