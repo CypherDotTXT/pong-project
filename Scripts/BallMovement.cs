@@ -21,10 +21,14 @@ public partial class BallMovement : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
-        Node collider = collision.GetCollider() as Node;
-        String stringCollider = collider.ToString();
+
+        if (collision == null)
+            return;
+
         if (collision != null)
         {
+            Node collider = collision.GetCollider() as Node;
+            string stringCollider = collider.Name;
 
             if (collider.IsInGroup("Player"))
             {
