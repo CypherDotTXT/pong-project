@@ -10,14 +10,12 @@ size = Vector2(10, 109)
 atlas = ExtResource("2_sbshm")
 region = Rect2(8, 12, 34, 126)
 
-[node name="Player one" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Player"]]
+[node name="Player one" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_j3pwt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_vugtc")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_76tt2")

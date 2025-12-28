@@ -12,14 +12,12 @@ radius = 11.0
 atlas = ExtResource("1_d60mj")
 region = Rect2(104, 3, 43, 45)
 
-[node name="Ball" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Ball" type="CharacterBody2D"]
 script = ExtResource("1_ij5cq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yk4cr")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_ij5cq")
 texture = SubResource("AtlasTexture_376qj")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ne8umrid2sed"]
+[gd_scene load_steps=10 format=3 uid="uid://ne8umrid2sed"]
 
 [ext_resource type="PackedScene" uid="uid://ddfawnshhqosk" path="res://Scenes/ball.tscn" id="1_r150o"]
 [ext_resource type="Script" uid="uid://bulm4cxyev0io" path="res://Scripts/Main.cs" id="1_rgh2o"]
@@ -15,6 +15,9 @@ size = Vector2(19, 688.25)
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_v1gob"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_rgh2o"]
 font_size = 50
 
 [node name="Main" type="Node2D"]
@@ -62,7 +65,7 @@ position = Vector2(64, 296)
 position = Vector2(1088, 296)
 
 [node name="StartTimer" type="Timer" parent="."]
-wait_time = 3.0
+one_shot = true
 
 [node name="P1Score" type="Label" parent="."]
 offset_left = 48.0
@@ -80,6 +83,13 @@ offset_bottom = 93.0
 text = "0"
 label_settings = SubResource("LabelSettings_v1gob")
 
+[node name="CountdownLabel" type="Label" parent="."]
+offset_left = 552.0
+offset_top = 24.0
+offset_right = 600.0
+offset_bottom = 72.0
+label_settings = SubResource("LabelSettings_rgh2o")
+
 [node name="P1 Start" type="Marker2D" parent="."]
 position = Vector2(64, 296)
 
@@ -88,3 +98,5 @@ position = Vector2(1088, 296)
 
 [node name="Ball Start" type="Marker2D" parent="."]
 position = Vector2(578, 286)
+
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]

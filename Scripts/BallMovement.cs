@@ -4,9 +4,21 @@ using System;
 public partial class BallMovement : CharacterBody2D
 {
     [Export] public float speed = 500.0f;
+    private Vector2 direction;
+    [Signal]
+    public delegate void Player1ScoredEventHandler();
+    [Signal]
+    public delegate void Player2ScoredEventHandler();
+
     public bool p1Scored = false;
     public bool p2Scored = false;
+
     public override void _Ready()
+    {
+        direction = Vector2.Zero; // Start stationary
+    }
+
+    public void StartMoving()
     {
         float startAngleDegrees = (float)GD.RandRange(15.0, 75.0);
         float angleRadians = Mathf.DegToRad(startAngleDegrees);
@@ -17,7 +29,6 @@ public partial class BallMovement : CharacterBody2D
 
         Velocity = direction * speed;
     }
-
     public override void _PhysicsProcess(double delta)
     {
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
@@ -36,11 +47,11 @@ public partial class BallMovement : CharacterBody2D
             }
             else if (stringCollider == "Right Boundary")
             {
-                HandleScoreP1();
+                EmitSignal(SignalName.Player1Scored);
             }
             else if (stringCollider == "Left Boundary")
             {
-                HandleScoreP2();
+                EmitSignal(SignalName.Player2Scored);
             }
             else
             {
@@ -79,15 +90,9 @@ public partial class BallMovement : CharacterBody2D
         Velocity = newDirection.Normalized() * speed;
     }
 
-    public bool HandleScoreP1()
+    public void Stop()
     {
-        p1Scored = true;
-        return p1Scored;
-    }
-
-    public bool HandleScoreP2()
-    {
-        p2Scored = true;
-        return p2Scored;
+        direction = Vector2.Zero;
+        Velocity = Vector2.Zero;
     }
 }
