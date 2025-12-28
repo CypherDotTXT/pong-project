@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddfawnshhqosk"]
+[gd_scene load_steps=8 format=3 uid="uid://ddfawnshhqosk"]
 
 [ext_resource type="Texture2D" uid="uid://brigks36igiuq" path="res://Sprites/sprites.png" id="1_d60mj"]
 [ext_resource type="Script" uid="uid://b15fl3n3k7ja6" path="res://Scripts/BallMovement.cs" id="1_ij5cq"]
+[ext_resource type="AudioStream" uid="uid://cfjw07okt7x67" path="res://Audio/SFX/ballhit.mp3" id="3_376qj"]
+[ext_resource type="AudioStream" uid="uid://c6wbsf1jjp3gu" path="res://Audio/SFX/Score.mp3" id="4_yk4cr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yk4cr"]
 radius = 11.0
@@ -21,3 +23,10 @@ shape = SubResource("CircleShape2D_yk4cr")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_ij5cq")
 texture = SubResource("AtlasTexture_376qj")
+
+[node name="CollisionSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(480, 448)
+stream = ExtResource("3_376qj")
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_yk4cr")

@@ -44,18 +44,22 @@ public partial class BallMovement : CharacterBody2D
             if (collider.IsInGroup("Player"))
             {
                 HandlePlayerBounce(collider);
+                GetNode<AudioStreamPlayer2D>("CollisionSound").Play();
             }
             else if (stringCollider == "Right Boundary")
             {
                 EmitSignal(SignalName.Player1Scored);
+                GetNode<AudioStreamPlayer2D>("ScoreSound").Play();
             }
             else if (stringCollider == "Left Boundary")
             {
                 EmitSignal(SignalName.Player2Scored);
+                GetNode<AudioStreamPlayer2D>("ScoreSound").Play();
             }
             else
             {
                 Velocity = Velocity.Bounce(collision.GetNormal());
+                GetNode<AudioStreamPlayer2D>("CollisionSound").Play();
             }
         }
     }

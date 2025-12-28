@@ -7,6 +7,10 @@ public partial class Main : Node2D
     private int p2Score = 0;
     private int countdownValue = 4;
     private Label countdownLabel;
+    [Signal]
+    public delegate void StartGameEventHandler();
+    [Signal]
+    public delegate void QuitGameEventHandler();
 
     public override void _Ready()
     {
@@ -16,7 +20,8 @@ public partial class Main : Node2D
         var ball = GetNode<BallMovement>("Ball");
         ball.Player1Scored += OnPlayer1Scored;
         ball.Player2Scored += OnPlayer2Scored;
-        NewGame();
+
+        GetNode<AudioStreamPlayer2D>("Background music").Play();
     }
 
     private void OnPlayer1Scored()
@@ -61,6 +66,7 @@ public partial class Main : Node2D
         {
             countdownLabel.Text = countdownValue.ToString();
             countdownLabel.Visible = true;
+            GetNode<AudioStreamPlayer2D>("Countdown").Play();
         }
         else
         {
@@ -70,5 +76,27 @@ public partial class Main : Node2D
             GetNode<Timer>("StartTimer").Stop();
             countdownValue = 4; // Reset for next time
         }
+    }
+
+    private void OnStartButtonPressed()
+    {
+        GetNode<Button>("StartButton").Visible = false;
+        GetNode<Button>("QuitButton").Visible = false;
+        NewGame();
+    }
+
+    private void OnQuitButtonPressed()
+    {
+        GetTree().Quit();
+    }
+
+    private void OnButtonMouseEntered()
+    {
+        GetNode<AudioStreamPlayer2D>("MenuClick").Play();
+    }
+
+    private void OnButtonMouseExited()
+    {
+        GetNode<AudioStreamPlayer2D>("MenuClick").Play();
     }
 }
