@@ -11,11 +11,15 @@ public partial class Main : Node2D
     public delegate void StartGameEventHandler();
     [Signal]
     public delegate void QuitGameEventHandler();
+    [Signal]
+    public delegate void BackgroundMusicEventHandler();
 
     public override void _Ready()
     {
         countdownLabel = GetNode<Label>("CountdownLabel");
         countdownLabel.Visible = false;
+        GetNode<Label>("P1WinLabel").Visible = false;
+        GetNode<Label>("P2WinLabel").Visible = false;
 
         var ball = GetNode<BallMovement>("Ball");
         ball.Player1Scored += OnPlayer1Scored;
@@ -24,18 +28,52 @@ public partial class Main : Node2D
         GetNode<AudioStreamPlayer2D>("Background music").Play();
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (Input.IsActionPressed("close_game"))
+            GetTree().Quit();
+    }
+
     private void OnPlayer1Scored()
     {
         p1Score++;
         GetNode<Label>("P1Score").Text = p1Score.ToString();
-        NewGame();
+
+        if (p1Score == 3)
+        {
+            GetNode<Label>("P1WinLabel").Text = "Player 1 Wins!";
+            GetNode<Label>("P1WinLabel").Visible = true;
+            GetNode<Button>("StartButton").Visible = true;
+            GetNode<Button>("QuitButton").Visible = true;
+
+            GetNode<BallMovement>("Ball").Stop();
+            GetNode<Timer>("StartTimer").Stop();
+        }
+        else
+        {
+            NewGame();
+        }
     }
 
     private void OnPlayer2Scored()
     {
         p2Score++;
         GetNode<Label>("P2Score").Text = p2Score.ToString();
-        NewGame();
+
+        if (p2Score == 3)
+        {
+            GetNode<Label>("P2WinLabel").Text = "Player 2 Wins!";
+            GetNode<Label>("P2WinLabel").Visible = true;
+            GetNode<Button>("StartButton").Visible = true;
+            GetNode<Button>("QuitButton").Visible = true;
+
+            GetNode<BallMovement>("Ball").Stop();
+            GetNode<Timer>("StartTimer").Stop();
+        }
+        else
+        {
+            NewGame();
+        }
     }
 
     public void NewGame()
@@ -82,6 +120,15 @@ public partial class Main : Node2D
     {
         GetNode<Button>("StartButton").Visible = false;
         GetNode<Button>("QuitButton").Visible = false;
+        GetNode<Label>("P1 Instructions").Visible = false;
+        GetNode<Label>("P2 Instructions").Visible = false;
+        GetNode<Label>("P1WinLabel").Visible = false;
+        GetNode<Label>("P2WinLabel").Visible = false;
+
+        p1Score = 0;
+        p2Score = 0;
+        GetNode<Label>("P1Score").Text = p1Score.ToString();
+        GetNode<Label>("P2Score").Text = p2Score.ToString();
         NewGame();
     }
 
@@ -98,5 +145,10 @@ public partial class Main : Node2D
     private void OnButtonMouseExited()
     {
         GetNode<AudioStreamPlayer2D>("MenuClick").Play();
+    }
+
+    private void OnBackgroundMusicFinished()
+    {
+        GetNode<AudioStreamPlayer2D>("Background music").Play();
     }
 }

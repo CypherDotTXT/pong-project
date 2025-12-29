@@ -10,7 +10,7 @@ size = Vector2(10, 109)
 atlas = ExtResource("2_ytrmp")
 region = Rect2(58, 12, 34, 126)
 
-[node name="Player two" type="CharacterBody2D" groups=["Player"]]
+[node name="StaticBody2D" type="StaticBody2D"]
 script = ExtResource("1_p8sfr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

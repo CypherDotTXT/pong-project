@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ne8umrid2sed"]
+[gd_scene load_steps=25 format=3 uid="uid://ne8umrid2sed"]
 
 [ext_resource type="PackedScene" uid="uid://ddfawnshhqosk" path="res://Scenes/ball.tscn" id="1_r150o"]
 [ext_resource type="Script" uid="uid://bulm4cxyev0io" path="res://Scripts/Main.cs" id="1_rgh2o"]
@@ -14,14 +14,50 @@ size = Vector2(1153.5, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r150o"]
 size = Vector2(19, 688.25)
 
+[sub_resource type="SystemFont" id="SystemFont_jw32o"]
+font_names = PackedStringArray("Permanent Marker")
+
 [sub_resource type="LabelSettings" id="LabelSettings_pbw6q"]
+font = SubResource("SystemFont_jw32o")
 font_size = 50
 
+[sub_resource type="SystemFont" id="SystemFont_50glp"]
+font_names = PackedStringArray("Permanent Marker")
+
 [sub_resource type="LabelSettings" id="LabelSettings_v1gob"]
+font = SubResource("SystemFont_50glp")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_rgh2o"]
 font_size = 50
+
+[sub_resource type="SystemFont" id="SystemFont_vy5pj"]
+font_names = PackedStringArray("Permanent Marker")
+
+[sub_resource type="LabelSettings" id="LabelSettings_bmxlf"]
+font = SubResource("SystemFont_vy5pj")
+font_size = 30
+
+[sub_resource type="SystemFont" id="SystemFont_4kpch"]
+font_names = PackedStringArray("Permanent Marker")
+
+[sub_resource type="LabelSettings" id="LabelSettings_grg3l"]
+font = SubResource("SystemFont_4kpch")
+font_size = 30
+
+[sub_resource type="SystemFont" id="SystemFont_bmxlf"]
+font_names = PackedStringArray("Permanent Marker")
+
+[sub_resource type="LabelSettings" id="LabelSettings_4kpch"]
+font = SubResource("SystemFont_bmxlf")
+font_size = 30
+
+[sub_resource type="SystemFont" id="SystemFont_grg3l"]
+font_names = PackedStringArray("Permanent Marker")
+
+[sub_resource type="LabelSettings" id="LabelSettings_frkhe"]
+font = SubResource("SystemFont_grg3l")
+font_size = 30
 
 [sub_resource type="SystemFont" id="SystemFont_rgh2o"]
 font_names = PackedStringArray("Permanent Marker")
@@ -110,6 +146,48 @@ offset_right = 600.0
 offset_bottom = 72.0
 label_settings = SubResource("LabelSettings_rgh2o")
 
+[node name="P1 Instructions" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 224.0
+offset_right = 424.0
+offset_bottom = 409.0
+text = "Player 1 controls
+
+Use W and S to 
+move up and down"
+label_settings = SubResource("LabelSettings_bmxlf")
+horizontal_alignment = 1
+
+[node name="P2 Instructions" type="Label" parent="."]
+offset_left = 664.0
+offset_top = 224.0
+offset_right = 1044.0
+offset_bottom = 409.0
+text = "Player 2 controls
+
+Use ↑ and ↓ to
+move up and down"
+label_settings = SubResource("LabelSettings_grg3l")
+horizontal_alignment = 1
+
+[node name="P1WinLabel" type="Label" parent="."]
+offset_left = 448.0
+offset_top = 224.0
+offset_right = 704.0
+offset_bottom = 416.0
+label_settings = SubResource("LabelSettings_4kpch")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2WinLabel" type="Label" parent="."]
+offset_left = 448.0
+offset_top = 224.0
+offset_right = 704.0
+offset_bottom = 416.0
+label_settings = SubResource("LabelSettings_frkhe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="StartButton" type="Button" parent="."]
 offset_left = 480.0
 offset_top = 64.0
@@ -131,6 +209,7 @@ text = "Quit"
 [node name="Background music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(480, 448)
 stream = ExtResource("5_pbw6q")
+volume_db = -11.886
 
 [node name="MenuClick" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_jw32o")
@@ -145,3 +224,4 @@ stream = ExtResource("6_v1gob")
 [connection signal="mouse_entered" from="QuitButton" to="." method="OnButtonMouseEntered"]
 [connection signal="mouse_exited" from="QuitButton" to="." method="OnButtonMouseExited"]
 [connection signal="pressed" from="QuitButton" to="." method="OnQuitButtonPressed"]
+[connection signal="finished" from="Background music" to="." method="OnBackgroundMusicFinished"]
