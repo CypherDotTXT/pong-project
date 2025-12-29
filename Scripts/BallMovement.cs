@@ -66,7 +66,7 @@ public partial class BallMovement : CharacterBody2D
 
     private void HandlePlayerBounce(Node player)
     {
-        var paddle = player as CharacterBody2D;
+        var paddle = player as StaticBody2D;
         if (paddle == null) return;
 
         var shape = paddle.GetNode<CollisionShape2D>("CollisionShape2D")

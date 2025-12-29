@@ -106,13 +106,13 @@ position = Vector2(578, 314)
 [node name="Ball Start" type="Marker2D" parent="."]
 position = Vector2(578, 314)
 
-[node name="Player one" parent="." instance=ExtResource("2_idj7w")]
+[node name="Player one" parent="." groups=["Player"] instance=ExtResource("2_idj7w")]
 position = Vector2(66, 322)
 
 [node name="P1 Start" type="Marker2D" parent="."]
 position = Vector2(66, 322)
 
-[node name="Player two" parent="." instance=ExtResource("3_kln2b")]
+[node name="Player two" parent="." groups=["Player"] instance=ExtResource("3_kln2b")]
 position = Vector2(1090, 322)
 
 [node name="P2 Start" type="Marker2D" parent="."]
